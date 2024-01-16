@@ -1,30 +1,28 @@
-name: web3-wallet-generator # Name of the extension
-version: 1.0.2 # Follow semver versioning
+name: griffy-wallet-generator # Name of the extension
+version: 0.0.1
 specVersion: v1beta # Version of the Firebase Extensions specification
 
-displayName: Generate Ethereum Wallet Address using Web3Auth
-description: Generate Ethereum Wallet Address with Web3Auth using it's MPC based Key Management System (KMS) and store it in Firebase Realtime Database.
+displayName: Generate Smart Account using Biconomy and Web3Auth
+description: Generate Ethereum Wallet Address with Web3Auth using it's MPC based Key Management System (KMS), use it to generate a smart account using Biconomy and store it in Firebase Realtime Database.
 icon: icon.png # Path to extension's icon
 tags: [utilities]
 
 license: Apache-2.0 # https://spdx.org/licenses/
 
 author:
-  authorName: Web3Auth
-  email: hello@web3auth.io
-  url: https://web3auth.io
+  authorName: Swaraj (Griffy)
+  email: swaraj@griffy.app
+  url: https://griffy.app
 
-sourceUrl: https://github.com/Web3Auth/web3auth-firebase-extension
+sourceUrl: https://github.com/1griffy/griffy-firebase-extension
 
 billingRequired: true
-
-externalServices:
-  - name: Web3Auth
-    pricingUri: https://web3auth.io/pricing
 
 roles:
   - role: firebasedatabase.admin
     reason: Allows the extension to create (user) data to Realtime Database.
+  - role: firebaseauth.admin
+    reason: Allows to get idToken from the user
 
 resources:
   - name: generateWalletAddress
@@ -118,4 +116,29 @@ params:
     example: users
     validationRegex: ^([0-9a-z_/]*)$
     validationErrorMessage: Invalid database path
+    required: false
+  - param: CHAIN_ID
+    label: Chain on which smart account needs to be created
+    description: Chain ID
+    type: string
+    required: true
+  - param: API_KEY
+    label: Firebase API key
+    description: Firebase API KEY
+    type: string
+    required: true
+  - param: RPC
+    label: RPC URL
+    description: Alchemy, Infura etc
+    type: string
+    required: true
+  - param: PAYMASTER_APIKEY
+    label: Biconomy Paymaster API key
+    description: Obtained from the biconomy dashboard
+    type: string
+    required: true
+  - param: BUNDLER_URL
+    label: Biconomy Bundler URL
+    description: Obtained from the biconomy dashboard
+    type: string
     required: false
